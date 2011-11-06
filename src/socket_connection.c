@@ -459,7 +459,11 @@ int socket_connection_create_unix(char *path){
 	
     struct sockaddr_un addr;
     memset(&addr, 0, sizeof(addr));
+#ifndef ANDROID
 	addr.sun_family = AF_UNIX;
+#else
+    addr.sun_family = AF_LOCAL;
+#endif
     strcpy(addr.sun_path, path);
     unlink(path);
     

@@ -54,7 +54,11 @@ extern "C" {
 #define BTSTACK_PORT            13333
 
 // UNIX domain socket for BTstack */
+#ifndef ANDROID
 #define BTSTACK_UNIX            "/tmp/BTstack"
+#else
+#define BTSTACK_UNIX            "/data/local/BTstack"
+#endif
 
 // packet handler
 typedef void (*btstack_packet_handler_t) (uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size);
